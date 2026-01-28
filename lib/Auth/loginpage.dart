@@ -41,11 +41,12 @@ class LoginScreen extends StatelessWidget {
         
         ),
         SizedBox(height: 20,),
-       InkWell(
+       Costombutton(
+        text: "Login",
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => OtpScreen() ));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => OtpScreen() ));
         },
-        child: Costombutton())
+       )
           ],
         ),
       ),
