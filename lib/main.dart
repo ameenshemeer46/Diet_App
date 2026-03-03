@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_application_1/screens/home/view/model/homeScreenProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_1/firebase_options.dart';
 import 'package:flutter_application_1/providers/auth_provider.dart';
 import 'package:flutter_application_1/screens/auth/login_screen.dart';
-import 'package:flutter_application_1/screens/home/home_screen.dart';
+import 'package:flutter_application_1/screens/home/view/screen/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,14 +18,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return MultiProvider(providers: [
+         ChangeNotifierProvider(
       create: (context) => AuthProvider(),
-      child: MaterialApp(
+      ),
+         ChangeNotifierProvider(
+      create: (context) => HomeScreenProvider(),
+      ),
+    ],
+      child:  MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Consumer<AuthProvider>(
           builder: (context, auth, _) {
             if (auth.isLoggedIn) {
-              return const HomeScreen();
+              return  HomeScreen();
             }
             return const LoginScreen();
           },
